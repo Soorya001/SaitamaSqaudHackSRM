@@ -55,7 +55,7 @@ class ProfilePage extends Component {
                             ) : (
                               <></>
                             )}
-                            <span className="description">Email</span>
+                            <span className="description">Name</span>
                           </div>
                           <div>
                             <span className="heading">22</span>
@@ -69,12 +69,18 @@ class ProfilePage extends Component {
                       </div>
                     </div>
                     <div className="text-center">
-                      <h3 className="h3pp">Jessica Jones</h3>
+                      <h3 className="h3pp">
+                        {this.props.auth ? (
+                          <span>{this.props.auth.email}</span>
+                        ) : (
+                          <></>
+                        )}
+                      </h3>
                       <div className="h5 font-weight-300">
-                        <i className="ni location_pin mr-2"></i>Address
+                        <i className="ni location_pin mr-2"></i>Email
                       </div>
                       <hr className="my-4" />
-                      <p>Description about the person</p>
+                      <h2 className="aaaaa">Welcome To Our Platform!</h2>
                       <h4>Your Skills</h4>
                       <ul>
                         <li>C++</li>
