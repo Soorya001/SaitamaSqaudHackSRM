@@ -1,6 +1,7 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
 const keys = require("../config/keys");
+const axios = require("axios");
 var i = 10;
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 module.exports = (app) => {
@@ -32,20 +33,19 @@ module.exports = (app) => {
   });
 
   app.get("/api/problems_data", async (req, res) => {
-    console.log(req.query.data);
+    console.log(req.query.handle);
     try {
-      let name = req.name;
+      let name = req.query.handle;
       const { data } = await axios.get(
         `https://codeforces.com/api/user.status`,
         {
           params: {
-            handle: req.query.handle,
+            handle: name,
             from: 1,
             count: 10000,
           },
         }
       );
-      const n = data.result.length;
       const totalResults = data.result;
       let cntOK = 0,
         cntNotOK = 0,
@@ -57,27 +57,19 @@ module.exports = (app) => {
         const { tags, rating } = obj.problem;
         const { verdict } = obj;
         tagArray.push(tags);
-        let x = {};
+
         if (verdict === "OK") {
           cntOK += 1;
           if (rating) {
             ratingRange += rating;
-            x = tags.map((tag) => {
-              return {
-                tag: tag,
-                rating: rating,
-              };
-            });
           }
         } else cntNotOK += 1;
         totalCount += 1;
-        console.log(x);
-        console.log(obj);
       });
-      ratingRange /= cntOK;
       console.log(cntOK);
       console.log(cntNotOK);
-      res.send(totalResults);
+      console.log(ratingRange);
+      res.send(cntOK.toString());
     } catch (err) {
       res.send(err);
     }

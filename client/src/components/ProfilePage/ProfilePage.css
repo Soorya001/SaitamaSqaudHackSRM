@@ -132,11 +132,12 @@ hr {
 .card-body {
   padding: 1.5rem;
   flex: 1 1 auto;
+  margin-top: -50px;
 }
 
 .card-header {
   margin-bottom: 0;
-  padding: 1.25rem 1.5rem;
+  padding: 0.1rem 1.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   background-color: #fff;
 }
@@ -162,6 +163,8 @@ button.bg-default:focus {
 
 .rounded-circle {
   border-radius: 50% !important;
+  width: 10rem !important;
+  height: 10rem !important;
 }
 
 .d-flex {

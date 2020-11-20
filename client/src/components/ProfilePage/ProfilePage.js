@@ -2,9 +2,15 @@ import React, { Component } from "react";
 //import anime from "animejs";
 import NavBar from "../NavBar/NavBar";
 import "./ProfilePage.css";
+import { fetch_problem_data } from "../../actions";
+import { connect } from "react-redux";
 
 class ProfilePage extends Component {
+  componentDidMount() {
+    this.props.fetch_problem_data("tourist");
+  }
   render() {
+    console.log(this.props.auth);
     return (
       <div className="ProfilePage">
         <link
@@ -23,11 +29,15 @@ class ProfilePage extends Component {
                     <div className="col-lg-3 order-lg-2">
                       <div className="card-profile-image">
                         <a href="/profile">
-                          <img
-                            src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg"
-                            className="rounded-circle"
-                            alt="your pic man!"
-                          ></img>
+                          {this.props.auth ? (
+                            <img
+                              src={this.props.auth.userImage}
+                              className="rounded-circle"
+                              alt="your pic man!"
+                            ></img>
+                          ) : (
+                            <></>
+                          )}
                         </a>
                       </div>
                     </div>
@@ -38,7 +48,13 @@ class ProfilePage extends Component {
                       <div className="col">
                         <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                           <div>
-                            <span className="heading">abc@gmail.com</span>
+                            {this.props.auth ? (
+                              <span className="heading">
+                                {this.props.auth.name}
+                              </span>
+                            ) : (
+                              <></>
+                            )}
                             <span className="description">Email</span>
                           </div>
                           <div>
@@ -65,8 +81,16 @@ class ProfilePage extends Component {
                         <li>JS</li>
                         <li>Machine Learning</li>
                       </ul>
-                      <h5 className="h5pp">Number of questions solved</h5>
-                      <p>60</p>
+                      {this.props.numOfProblems ? (
+                        <>
+                          <h5 className="h5pp">
+                            Number of questions solved in codeforces
+                          </h5>
+                          <p>{this.props.numOfProblems}</p>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -78,5 +102,7 @@ class ProfilePage extends Component {
     );
   }
 }
-
-export default ProfilePage;
+const mapStateToProps = ({ numOfProblems, auth }) => {
+  return { numOfProblems, auth };
+};
+export default connect(mapStateToProps, { fetch_problem_data })(ProfilePage);

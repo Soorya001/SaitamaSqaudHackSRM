@@ -7,6 +7,12 @@ export const fetchUser = () => async (dispatch) => {
   dispatch({ type: FETCH_USER, payload: response.data });
 };
 
-export const fetch_problem_data = () => async (dispatch) => {
-  const response = await axios.get("/api/");
+export const fetch_problem_data = (handle) => async (dispatch) => {
+  const response = await axios.get("/api/problems_data", {
+    params: {
+      handle: handle,
+    },
+  });
+  console.log(response);
+  dispatch({ type: FETCH_PROBLEM_DATA, payload: response.data });
 };
