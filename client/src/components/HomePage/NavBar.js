@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./NavBar.css";
+import "./HomePage.css";
 
 class NavBar extends Component {
   render() {
@@ -8,12 +8,12 @@ class NavBar extends Component {
       <div className="navbar-container">
         <div className="navbar">
           <div className="navbar-brand">
-            <Link to="/profile">Profile</Link>
+            <Link to="/home">Home</Link>
           </div>
           <div className="navbar-menu">
             <div className="home-link">
-              <Link to="/home" className="navbar-menu-link btn-1">
-                Home
+              <Link to="/profile" className="navbar-menu-link btn-1">
+                Profile
               </Link>
             </div>
             <div>

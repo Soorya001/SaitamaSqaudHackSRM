@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import "./HomePage.css";
+import ChatBot from "./ChatBot/ChatBot";
+import NavBar from "./NavBar";
+
 class HomePage extends Component {
   render() {
-    return <div className="home_page_container">home page</div>;
+    return (
+      <div className="chatbot_container">
+        <NavBar data-aos-duration="2500" data-aos="fade-down" />
+        <ChatBot />
+      </div>
+    );
   }
 }
 
